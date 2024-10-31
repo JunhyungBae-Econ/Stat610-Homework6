@@ -1,10 +1,14 @@
+library(bench)
+
 source("llr_functions.R")
 # Try out functions to see if it works on some data:
 library(reshape2) # package that contains "french_fries"
 data(french_fries)
 french_fries = french_fries[complete.cases(french_fries),]
 z = seq(0, 15, length.out = 100)
+bench::mark(
 fits = llr(z = z, x = french_fries$potato, y = french_fries$buttery, omega = 2)
+) -> bnch
 plot(z, fits)
 
 # Loop through different omega values
@@ -19,3 +23,5 @@ for (i in 1:10){
 # the window around the target point z, meaning more data points will contribute to 
 # the local regression fit for each point, thus effectively averaging out local fluctuations 
 # and reducing the impact of noise, leading to smoother curves.
+
+print(bnch)
