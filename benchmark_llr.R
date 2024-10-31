@@ -9,6 +9,7 @@ z = seq(0, 15, length.out = 100)
 bench::mark(
 fits = llr(z = z, x = french_fries$potato, y = french_fries$buttery, omega = 2)
 ) -> bnch
+print(bnch)
 plot(z, fits)
 
 # Loop through different omega values
@@ -24,4 +25,3 @@ for (i in 1:10){
 # the local regression fit for each point, thus effectively averaging out local fluctuations 
 # and reducing the impact of noise, leading to smoother curves.
 
-print(bnch)
